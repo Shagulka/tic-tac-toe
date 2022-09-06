@@ -1,0 +1,203 @@
+<!-- one file tic-tac-toe game using html with scripts with beautiful material design-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .board {
+            width: 300px;
+            height: 300px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-gap: 10px;
+            border: 1px solid black;
+        }
+
+        .board div {
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            cursor: pointer;
+        }
+
+        .board div:hover {
+            background-color: #e0e0e0;
+        }
+
+        .board div:active {
+            background-color: #bdbdbd;
+        }
+
+        .board div:nth-child(1) {
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+
+        .board div:nth-child(2) {
+            grid-column: 2/3;
+            grid-row: 1/2;
+        }
+
+        .board div:nth-child(3) {
+            grid-column: 3/4;
+            grid-row: 1/2;
+        }
+
+        .board div:nth-child(4) {
+            grid-column: 1/2;
+            grid-row: 2/3;
+        }
+
+        .board div:nth-child(5) {
+            grid-column: 2/3;
+            grid-row: 2/3;
+        }
+
+        .board div:nth-child(6) {
+            grid-column: 3/4;
+            grid-row: 2/3;
+        }
+
+        .board div:nth-child(7) {
+            grid-column: 1/2;
+            grid-row: 3/4;
+        }
+
+        .board div:nth-child(8) {
+            grid-column: 2/3;
+            grid-row: 3/4;
+        }
+
+        .board div:nth-child(9) {
+            grid-column: 3/4;
+            grid-row: 3/4;
+        }
+
+
+        /*make sure divs are always the same size despite content*/
+        .board div {
+            width: 100%;
+            height: 100%;
+        }
+
+        .board div span {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .board div span span {
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+
+        /*a little bit of border radius */
+        .board div {
+            border-radius: 5px;
+        }
+
+        /*make sure the board is always centered*/
+        .board {
+            margin: auto;
+        }
+        
+
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="board">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        let board = document.querySelectorAll(".board div");
+        let player = "X";
+        let game = true;
+        let count = 0;
+        let win = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        //make sure Xs are red and Os are blue
+        let color = {
+            "X": "red",
+            "O": "blue"
+        };
+
+        //add event listeners to all divs
+        for (let i = 0; i < board.length; i++) {
+            board[i].addEventListener("click", function () {
+                if (game) {
+                    if (board[i].innerHTML == "") {
+                        board[i].innerHTML = player;
+                        board[i].style.color = color[player];
+                        count++;
+                        if (count >= 5) {
+                            checkWin();
+                        }
+                        if (player == "X") {
+                            player = "O";
+                        } else {
+                            player = "X";
+                        }
+                    }
+                }
+            });
+        }
+
+        //check for win
+        function checkWin() {
+            for (let i = 0; i < win.length; i++) {
+                if (board[win[i][0]].innerHTML == board[win[i][1]].innerHTML && board[win[i][1]].innerHTML == board[win[i][2]].innerHTML && board[win[i][0]].innerHTML != "") {
+                    game = false;
+                    alert("Player " + board[win[i][0]].innerHTML + " wins!");
+                }
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
