@@ -192,6 +192,7 @@
                 if (board[win[i][0]].innerHTML == board[win[i][1]].innerHTML && board[win[i][1]].innerHTML == board[win[i][2]].innerHTML && board[win[i][0]].innerHTML != "") {
                     game = false;
                     alert("Player " + board[win[i][0]].innerHTML + " wins!");
+                    window.location.reload();
                 }
             }
         }
