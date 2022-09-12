@@ -1,5 +1,6 @@
 <!-- one file tic-tac-toe game using html with scripts with beautiful material design-->
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,16 +118,10 @@
         .board {
             margin: auto;
         }
-        
-
-
-
-
-
-
     </style>
 
 </head>
+
 <body>
     <div class="container">
         <div class="board">
@@ -181,10 +176,29 @@
                         } else {
                             player = "X";
                         }
+                        if (count == 9) {
+                            alert("Draw!");
+                            game = false;
+                            //reset game
+                            reset();
+
+                        }
                     }
                 }
             });
         }
+
+        //reset game
+        function reset() {
+            for (let i = 0; i < board.length; i++) {
+                board[i].innerHTML = "";
+            }
+            player = "X";
+            game = true;
+            count = 0;
+        }
+
+       
 
         //check for win
         function checkWin() {
@@ -192,6 +206,7 @@
                 if (board[win[i][0]].innerHTML == board[win[i][1]].innerHTML && board[win[i][1]].innerHTML == board[win[i][2]].innerHTML && board[win[i][0]].innerHTML != "") {
                     game = false;
                     alert("Player " + board[win[i][0]].innerHTML + " wins!");
+                    reset();
                 }
             }
         }
